@@ -226,7 +226,7 @@ class common {
   * @throws Exception $e
   * 
   */
-  public static function encrypt($text,$key='',$iv='',$bit_check=8,$cypher_type='MCRYPT_TRIPLEDES') {
+  public static function encrypt($text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES) {
     try {
       /* Ensure the key & IV is the same for both encrypt & decrypt. */
       if(!empty($text) && is_string($text)) {
@@ -265,7 +265,7 @@ class common {
   * @throws Exception $e
   * 
   */
-  public static function decrypt($encrypted_text,$key='',$iv='',$bit_check=8,$cypher_type='MCRYPT_TRIPLEDES') {
+  public static function decrypt($encrypted_text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES) {
     try {
       /* Ensure the key & IV is the same for both encrypt & decrypt. */
       if(!empty($encrypted_text)) {
