@@ -25,13 +25,13 @@ $calendar = common::calendar;
 
 Functions Provided
 ------------------
- - db_data_escape($data)
- - scrub($data)
- - blogscrub($data)
- - calendar($debug='false',$timezone='UTC')
- - parsedate($date)
- - encrypt($text,$key='',$iv='',$bit_check=8,$cypher_type='MCRYPT_TRIPLEDES')
- - decrypt($encrypted_text,$key='',$iv='',$bit_check=8,$cypher_type='MCRYPT_TRIPLEDES')
+ - db_data_escape()
+ - scrub()
+ - blogscrub()
+ - calendar()
+ - parsedate()
+ - encrypt()
+ - decrypt()
 
 
 Version
