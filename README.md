@@ -1,6 +1,6 @@
 Copyright 2009-2014 Rich Morgan (rich.l.morgan (at) gmail.com)
 
-Commonly used functions for PHP development aggregated within this class.  Hopefully these static classes will make life easier for those needing this functionality.
+Commonly used functions for PHP development aggregated within this class.  Hopefully these static classes will make life easier for those needing this functionality.  YMMV.
 
 
 License
@@ -17,10 +17,11 @@ Usage
 Copy this file to your web directory.  Include() the file in the head of scripts that require the functionality or use an autoloader to load the class as-needed.  These functions are all static so there's no need to instantiate a new 'common' object.
 
 Example:
-<pre>
+
+```php
 include_once('common.php');
 $calendar = common::calendar;
-</pre>
+```
 
 
 Functions Provided
