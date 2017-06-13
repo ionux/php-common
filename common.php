@@ -1,10 +1,7 @@
 <?php
-
 /**
- *
  *  Commonly used functions for PHP development aggregated within this class.
- *  Copyright 2009-2014 Rich Morgan (rich.l.morgan (at) gmail.com)
- *
+ *  Copyright 2009-2014 Rich Morgan (rich@richmorgan.me)
  *
  *  common.php
  * 
@@ -27,69 +24,62 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- *
  */
 
-
-class common {
-
+class common
+{
   /**
-  *
   * Yet another generic function to help ensure safe
   * data is used in database functions.
   *
   * @param string $data
   * @return string $data
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function db_data_escape($data) {
+  public static function db_data_escape($data)
+  {
     try {
-      if(!empty($data) && is_string($data))
+      if (!empty($data) && is_string($data))
         return str_replace(array('\\', "\0", "\n", "\r", "'", '"', "\x1a"), array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'), $data);
 
       return $data;
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
 
-
   /**
-  *
   * Yet another generic function to help ensure safe
   * data is used in database functions.
   *
   * @param string $data
   * @return string $data
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function scrub($data) {
+  public static function scrub($data)
+  {
     try {
       return trim(strip_tags(htmlentities($data)));
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
 
-
   /**
-  *
   * Function for converting programming code within <code> ... </code>
   * tags into safe HTML for display in blogs or other websites.
   *
   * @param string $data
   * @return string $data
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function blogscrub($data) {
+  public static function blogscrub($data)
+  {
     try {
       $codestart = strpos($data,'<code>') + 6;
       $codeend = strpos($data,'</code>');
 
-      if($codestart >= 0 && $codeend > $codestart)
+      if ($codestart >= 0 && $codeend > $codestart)
         return substr($data,0,$codestart) . htmlentities(substr($data,$codestart,($codeend-strlen($data)))) . substr($data,$codeend);
       else
         return $data;
@@ -98,19 +88,17 @@ class common {
     }
   }
 
-
   /**
-  *
   * Creates a monthly calendar based on the timezone specified. Calendar data returned is
   * in HTML table form.
   *
   * @param string $debug
   * @param string $timezone
   * @return string $calendar_html
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function calendar($debug='false',$timezone='UTC') {
+  public static function calendar($debug='false',$timezone='UTC')
+  {
     try {
       date_default_timezone_set($timezone);
       $now = getdate(time());
@@ -119,7 +107,7 @@ class common {
       $dayTotal = cal_days_in_month(0, $date['mon'], $date['year']);
       $calendar_html = '';
 
-      if($debug=='true') {
+      if ($debug=='true') {
         /* Display the variables for debugging. */
         print '<pre>';
         print '$now = ';
@@ -137,14 +125,14 @@ class common {
       }
 
       /* Print the calendar header with the month name. */
-      $calendar_html = '<table border="0" cellspacing="5" cellpadding="3" width="805" style="font-family: Arial; border:1px #000 solid;"><tr><td colspan="7" style="background: #eee; border:1px #000 solid; font-size:1.25em;" height="50" ><center><strong>' . $date['month'] . '</strong></center></td></tr>';
-      $calendar_html = $calendar_html . '<tr><td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Sunday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Monday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Tuesday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Wednesday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Thursday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Friday</strong></td>
-        <td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Saturday</strong></td></tr>';
+      $calendar_html = '<table border="0" cellspacing="5" cellpadding="3" width="805" style="font-family: Arial; border:1px #000 solid;"><tr><td colspan="7" style="background: #eee; border:1px #000 solid; font-size:1.25em;" height="50" ><center><strong>' . $date['month'] . '</strong></center></td></tr>' .
+                       '<tr><td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Sunday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Monday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Tuesday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Wednesday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Thursday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Friday</strong></td>' .
+                       '<td valign="top" width="105" height="30" style="border:1px #000 solid;"><strong>Saturday</strong></td></tr>';
 
       /* Weeks */
       for ($i = 0; $i < 6; $i++) {
@@ -180,25 +168,23 @@ class common {
       $calendar_html = $calendar_html .  '</table>' . "\n";
 
       return $calendar_html;
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
 
-
   /**
-  *
   * Creates an array out of a string date format.
   *
   * @param string $date
   * @return array $date
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function parsedate($date) {
+  public static function parsedate($date)
+  {
     try {
       /* Take a date in any format and return an array. */
-      if(!empty($text) && is_string($text)) {
+      if (!empty($text) && is_string($text)) {
         $tempdata = str_replace("/","~",$date);
         $tempdata = str_replace("-","~",$date);
         $temparray = explode("~",$tempdata);  
@@ -206,14 +192,12 @@ class common {
       } else {
         return $date;
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
 
-
   /**
-  *
   * Encrypts $text based on your $key and $iv.  The returned text is
   * base-64 encoded to make it easier to work with in various scenarios.
   *
@@ -223,17 +207,17 @@ class common {
   * @param int $bit_check
   * @param string $cypher_type
   * @return string $text
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function encrypt($text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES) {
+  public static function encrypt($text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES)
+  {
     try {
       /* Ensure the key & IV is the same for both encrypt & decrypt. */
-      if(!empty($text) && is_string($text)) {
+      if (!empty($text) && is_string($text)) {
         $text_num = str_split($text,$bit_check);
         $text_num = $bit_check - strlen($text_num[count($text_num) - 1]);
 
-        for($i=0; $i<$text_num; $i++)
+        for ($i=0; $i<$text_num; $i++)
           $text = $text . chr($text_num);
 
         $cipher = mcrypt_module_open($cypher_type,'','cbc','');
@@ -245,14 +229,12 @@ class common {
       } else {
         return $text;
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
 
-
   /**
-  *
   * Decrypts $text based on your $key and $iv.  Make sure you use the same key
   * and initialization vector that you used when encrypting the $text.
   *
@@ -262,21 +244,21 @@ class common {
   * @param int $bit_check
   * @param string $cypher_type
   * @return string $text
-  * @throws Exception $e
-  * 
+  * @throws \Exception $e
   */
-  public static function decrypt($encrypted_text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES) {
+  public static function decrypt($encrypted_text,$key='',$iv='',$bit_check=8,$cypher_type=MCRYPT_TRIPLEDES)
+  {
     try {
       /* Ensure the key & IV is the same for both encrypt & decrypt. */
-      if(!empty($encrypted_text)) {
+      if (!empty($encrypted_text)) {
         $cipher = mcrypt_module_open($cypher_type,'','cbc','');
         mcrypt_generic_init($cipher, $key, $iv);
         $decrypted = mdecrypt_generic($cipher,base64_decode($encrypted_text));
         mcrypt_generic_deinit($cipher);
         $last_char=substr($decrypted,-1);
   
-        for($i=0; $i<$bit_check-1; $i++) {
-          if(chr($i) == $last_char) {
+        for ($i=0; $i<$bit_check-1; $i++) {
+          if (chr($i) == $last_char) {
             $decrypted=substr($decrypted,0,strlen($decrypted)-$i);
             break;
           }
@@ -286,10 +268,8 @@ class common {
       } else {
         return $encrypted_text;
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return 'Error: ' . $e->getMessage();
     }
   }
-
-  /* end common class */
 }
