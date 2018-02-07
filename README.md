@@ -1,4 +1,4 @@
-Copyright 2009-2017 Rich Morgan (rich@richmorgan.me)
+Copyright 2009-2018 Rich Morgan (rich@richmorgan.me)
 
 Commonly used functions for PHP development aggregated within this class.  Hopefully these static classes will make life easier for those needing this functionality.  YMMV.
 
