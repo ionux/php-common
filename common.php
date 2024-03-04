@@ -1,7 +1,7 @@
 <?php
 /**
  *  Commonly used functions for PHP development aggregated within this class.
- *  Copyright 2009-2023 Rich Morgan (rich@richmorgan.me)
+ *  Copyright 2009-2024 Rich Morgan (rich@richmorgan.me)
  *
  *  common.php
  * 
